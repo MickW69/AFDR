@@ -1,186 +1,107 @@
-type: horizontal-stack
-cards:
-  - type: conditional
-    conditions:
-      - entity: sensor.YOURLOCATION_fire_danger_0
-        state: unknown
-    card:
-      type: markdown
-      content: >
-        <center>
+type: markdown
+content: >-
+  {% set fdr_today = states('sensor.river_ranch_fire_danger_0') %}
+
+  {% set fdr_tomorrow = states('sensor.river_ranch_fire_danger_1') %}
+
+  {% set fdr_2 = states('sensor.river_ranch_fire_danger_2') %}
+
+  {% set fdr_3 = states('sensor.river_ranch_fire_danger_3') %}
+
+  {% set fdr_4 = states('sensor.river_ranch_fire_danger_4') %}
+
+  {% set fdr_5 = states('sensor.river_ranch_fire_danger_5') %}
+
+  {% set fdr_6 = states('sensor.river_ranch_fire_danger_6') %}
 
 
-        <img src='/local/none.png' width='50%'>
+  {% if fdr_today != 'unknown' %}
+
+  {% if fdr_today == 'No Rating' %}
+
+  <img src='/local/none.png' width='50%'>
 
 
-        Today's **FDR** for your home location is **NO RATING**
+  Today, {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_0.attributes.date) |
+  timestamp_custom('%A') }}, the forecast fire danger is {{ fdr_today }}**
+
+  {% elif fdr_today == 'Moderate' %}
+
+  <img src='/local/moderate.png' width='50%'>
 
 
-        Tomorrow, {{
-        as_timestamp(states.sensor.YOURLOCATION_fire_danger_1.attributes.date) |
-        timestamp_custom('%A') }}, the forecast FDR is {{
-        states('sensor.YOURLOCATION_fire_danger_1') }}
+  <font color=green>**Today, {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_0.attributes.date) |
+  timestamp_custom('%A') }}, the forecast fire danger is {{ fdr_today
+  }}**</font>
+
+  {% elif fdr_today == 'High' %}
+
+  <img src='/local/high.png' width='50%'>
 
 
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_2.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_2') }}
+  <font color=yellow>**Today, {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_0.attributes.date) |
+  timestamp_custom('%A') }}, the forecast fire danger is {{ fdr_today
+  }}**</font>
 
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_3.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_3') }}
+  {% elif fdr_today == 'Extreme' %}
 
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_4.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_4') }}
+  <img src='/local/extreme.png' width='50%'>
 
 
-        </center>     
-  - type: conditional
-    conditions:
-      - entity: sensor.YOURLOCATION_fire_danger_0
-        state: Moderate
-    card:
-      type: markdown
-      content: >
-        <center>
+  <font color=orange>**Today, {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_0.attributes.date) |
+  timestamp_custom('%A') }}, the forecast fire danger is {{ fdr_today
+  }}**</font>
+
+  {% elif fdr_today == 'Catastrophic' %}
+
+  <img src='/local/catastrophic.png' width='50%'>
 
 
-        <img src='/local/moderate.png' width='50%'>
+  <font color=red>**Today, {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_0.attributes.date) |
+  timestamp_custom('%A') }}, the forecast fire danger is {{ fdr_today
+  }}**</font>
 
+  {% endif %}
 
-        Today's **FDR** for your home location is <font color =
-        green> **MODERATE** </font>
+  {% endif %}
 
+  {% if fdr_tomorrow != 'unknown' %}  {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_1.attributes.date) |
+  timestamp_custom('%A') }}'s forecast fire danger is {{ fdr_tomorrow }}
 
-        Tomorrow, {{
-        as_timestamp(states.sensor.YOURLOCATION_fire_danger_1.attributes.date) |
-        timestamp_custom('%A') }}, the forecast FDR is {{
-        states('sensor.YOURLOCATION_fire_danger_1') }}
+  {% endif %}
 
+  {% if fdr_2 != 'unknown' %}  {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_2.attributes.date) |
+  timestamp_custom('%A') }}'s forecast fire danger is {{ fdr_2 }}
 
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_2.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_2') }}
+  {% endif %}
 
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_3.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_3') }}
+  {% if fdr_3 != 'unknown' %}  {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_3.attributes.date) |
+  timestamp_custom('%A') }}'s forecast fire danger is {{ fdr_3 }}
 
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_4.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_4') }}
+  {% endif %}
 
+  {% if fdr_4 != 'unknown' %}  {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_4.attributes.date) |
+  timestamp_custom('%A') }}'s forecast fire danger is {{ fdr_4 }}
 
-        </center>     
-  - type: conditional
-    conditions:
-      - entity: sensor.YOURLOCATION_fire_danger_0
-        state: High
-    card:
-      type: markdown
-      content: >
-        <center>
+  {% endif %}
 
+  {% if fdr_5 != 'unknown' %}  {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_5.attributes.date) |
+  timestamp_custom('%A') }}'s forecast fire danger is {{ fdr_5 }}
 
-        <img src='/local/high.png' width='50%'>
+  {% endif %}
 
+  {% if fdr_6 != 'unknown' %}  {{
+  as_timestamp(states.sensor.river_ranch_fire_danger_6.attributes.date) |
+  timestamp_custom('%A') }}'s forecast fire danger is {{ fdr_6 }}
 
-        Today's **FDR** for your home location is <font color =
-        yellow> **HIGH** </font>
-
-
-        Tomorrow, {{
-        as_timestamp(states.sensor.YOURLOCATION_fire_danger_1.attributes.date) |
-        timestamp_custom('%A') }}, the forecast FDR is {{
-        states('sensor.YOURLOCATION_fire_danger_1') }}
-
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_2.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_2') }}
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_3.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_3') }}
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_4.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_4') }}
-
-
-        </center>     
-  - type: conditional
-    conditions:
-      - entity: sensor.YOURLOCATION_fire_danger_0
-        state: Extreme
-    card:
-      type: markdown
-      content: >
-        <center>
-
-
-        <img src='/local/extreme.png' width='50%'>
-
-
-        Today's **FDR** for your home location is <font color =
-        orange> **EXTREME** </font>
-
-
-        Tomorrow, {{
-        as_timestamp(states.sensor.YOURLOCATION_fire_danger_1.attributes.date) |
-        timestamp_custom('%A') }}, the forecast FDR is {{
-        states('sensor.YOURLOCATION_fire_danger_1') }}
-
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_2.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_2') }}
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_3.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_3') }}
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_4.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_4') }}
-
-
-        </center>     
-  - type: conditional
-    conditions:
-      - entity: sensor.YOURLOCATION_fire_danger_0
-        state: Catastrophic
-    card:
-      type: markdown
-      content: >
-        <center>
-
-
-        <img src='/local/catastrophic.png' width='50%'>
-
-
-        Today's **FDR** for your home location is <font color =
-        red> **CATASTROPHIC** </font>
-
-
-        Tomorrow, {{
-        as_timestamp(states.sensor.YOURLOCATION_fire_danger_1.attributes.date) |
-        timestamp_custom('%A') }}, the forecast FDR is {{
-        states('sensor.YOURLOCATION_fire_danger_1') }}
-
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_2.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_2') }}
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_3.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_3') }}
-
-        {{ as_timestamp(states.sensor.YOURLOCATION_fire_danger_4.attributes.date) |
-        timestamp_custom('%A') }}'s FDR is forecast as {{
-        states('sensor.YOURLOCATION_fire_danger_4') }}
-
-
-        </center>     
+  {% endif %}
