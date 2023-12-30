@@ -1,3 +1,7 @@
+All credit to https://github.com/AdamGit69
+
+I just tweaked the code a bit to make it a little more effecient in my opinion.
+
 # AFDR
 Australian Fire Danger Ratings Card For Home Assistant - Under Construction! 
 
